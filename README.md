@@ -94,7 +94,7 @@ screenshots (if any).
   one in the form until it finds one that actually produces a suggestion,
   then selects it.
 
-## Run Results (fill in after local execution)
+## Run Results
 
 > - Total scenarios: 5
 > - Passed: 5
