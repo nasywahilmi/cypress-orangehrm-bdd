@@ -85,11 +85,6 @@ cypress/reports/index.html
   `cypress/pages/*.js`. Step definitions call page object methods.
 - BDD: Feature files use Gherkin syntax and are located in
   `cypress/e2e/features/`.
-- The "Employee Name" field in the Add User form is an autocomplete. The
-  test implementation waits for dropdown suggestions (`.oxd-autocomplete-dropdown-option`)
-  and selects the first suggestion. Because the public demo's employee
-  dataset can vary, `newUsers.json` uses a short prefix (e.g. "a") to search
-  rather than a fixed full name.
 
 ## Latest test run (local)
 
@@ -102,8 +97,6 @@ following result (captured from the test run):
 - Screenshots saved: 2 (in `cypress/screenshots/`)
 - HTML report: `cypress/reports/index.html`
 - Duration: ~56s
-
-Note: failing tests were not debugged — this summary reflects the run as-is.
 
 ## References
 - Boilerplate: https://github.com/purrarri/BoilerplateCermatiCypress
