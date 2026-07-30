@@ -96,8 +96,6 @@ screenshots (if any).
 
 ## Run Results (fill in after local execution)
 
-> After running `npm run test`, paste a results summary here, for example:
->
 > - Total scenarios: 5
 > - Passed: 5
 > - Failed: 0
