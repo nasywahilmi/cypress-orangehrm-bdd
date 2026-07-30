@@ -3,6 +3,12 @@ import LoginPage from "../../pages/LoginPage";
 import DashboardPage from "../../pages/DashboardPage";
 import AdminPage from "../../pages/AdminPage";
 
+// Tracks the actual (timestamp-suffixed) username generated for each
+// fixture index within a scenario, so the later "should appear in the
+// list" step searches for the exact username that was created - not the
+// raw fixture value.
+const generatedUsernames = {};
+
 Given("user is on the login page", () => {
   LoginPage.visit();
 });
@@ -37,15 +43,19 @@ Then("user should see the Admin page", () => {
 
 When("user adds a new user with role {string} from fixture index {int}", (role, index) => {
   cy.fixture("newUsers").then((users) => {
-    const user = users[index];
-    AdminPage.addNewUser(user);
+    const baseUser = users[index];
+    // Suffix the username with a timestamp so re-running the suite never
+    // collides with a username created by a previous run.
+    const uniqueUsername = `${baseUser.username}.${Date.now()}`;
+    generatedUsernames[index] = uniqueUsername;
+
+    AdminPage.addNewUser({ ...baseUser, username: uniqueUsername });
+    AdminPage.verifySuccessToast();
   });
 });
 
 Then("the newly created user {string} should appear in the user list", (index) => {
-  cy.fixture("newUsers").then((users) => {
-    const user = users[Number(index)];
-    AdminPage.searchUser(user.username);
-    AdminPage.verifyUserExists(user.username);
-  });
+  const username = generatedUsernames[Number(index)];
+  AdminPage.searchUser(username);
+  AdminPage.verifyUserExists(username);
 });

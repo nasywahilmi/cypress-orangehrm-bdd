@@ -1,14 +1,12 @@
 [
   {
     "userRole": "ESS",
-    "employeeName": "a",
     "status": "Enabled",
     "username": "cypressuser1",
     "password": "CypressPass@123"
   },
   {
     "userRole": "Admin",
-    "employeeName": "a",
     "status": "Enabled",
     "username": "cypressuser2",
     "password": "CypressPass@123"
