@@ -20,15 +20,15 @@ cypress-orangehrm-bdd/
 │   │   │   └── admin_management.feature
 │   │   └── step_definitions/
 │   │       └── admin_management.steps.js
-  │   ├── pages/
-  │   │   ├── LoginPage.js
-  │   │   ├── DashboardPage.js
-  │   │   └── AdminPage.js
-  │   ├── fixtures/
-  │   │   ├── credentials.json
-  │   │   └── newUsers.json
-  │   └── support/
-  │       └── e2e.js
+│   ├── pages/
+│   │   ├── LoginPage.js
+│   │   ├── DashboardPage.js
+│   │   └── AdminPage.js
+│   ├── fixtures/
+│   │   ├── credentials.json
+│   │   └── newUsers.json
+│   └── support/
+│       └── e2e.js
 ├── cypress.config.js
 ├── .cypress-cucumber-preprocessorrc.json
 ├── package.json
