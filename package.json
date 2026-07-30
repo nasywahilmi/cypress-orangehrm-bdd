@@ -1,0 +1,17 @@
+{
+  "name": "cypress-orangehrm-bdd",
+  "version": "1.0.0",
+  "description": "Cypress BDD (Cucumber) + POM automation for OrangeHRM demo - Assignment Week 9",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test": "cypress run --reporter cypress-mochawesome-reporter",
+    "test:headed": "cypress run --headed --reporter cypress-mochawesome-reporter"
+  },
+  "devDependencies": {
+    "cypress": "^13.13.0",
+    "@badeball/cypress-cucumber-preprocessor": "^20.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "cypress-mochawesome-reporter": "^3.8.2"
+  }
+}
