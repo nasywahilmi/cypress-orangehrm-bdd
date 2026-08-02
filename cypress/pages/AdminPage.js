@@ -214,8 +214,20 @@ class AdminPage {
   }
 
   verifyUserExists(username) {
+    // IMPORTANT: don't chain .should().first().should() in one command.
+    // After a search, OrangeHRM's Vue app can re-render the table rows
+    // (e.g. results arrive in two waves) between the first assertion
+    // resolving and .first() grabbing an element - if that happens mid-
+    // chain, Cypress ends up holding a DOM node that's already been
+    // replaced/removed, causing "element detached from DOM" errors like
+    // the one seen in CI. Splitting into two separate, independently
+    // retry-able cy.get calls avoids holding onto a stale reference:
+    // each one re-queries the live DOM from scratch when it retries.
+    cy.get(".oxd-table-body .oxd-table-row", { timeout: 10000 }).should(
+      "have.length.at.least",
+      1
+    );
     cy.get(".oxd-table-body .oxd-table-row", { timeout: 10000 })
-      .should("have.length.at.least", 1)
       .first()
       .should("contain.text", username);
     return this;

@@ -26,21 +26,27 @@ pipeline {
 
         stage('Run Cypress Tests') {
             steps {
-                // continue the pipeline even if tests fail, so the
-                // report can still be published/archived afterwards
-                bat 'npx cypress run --reporter cypress-mochawesome-reporter'
+                // catchError lets the pipeline continue to the 'post' block
+                // (to publish the report) even when tests fail, while still
+                // marking the overall build as unstable/failed.
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    bat 'npx cypress run --reporter cypress-mochawesome-reporter'
+                }
             }
         }
     }
 
     post {
         always {
-            // Publish the Mochawesome HTML report inside Jenkins
+            // Publish the Mochawesome HTML report inside Jenkins.
+            // NOTE: cypress-mochawesome-reporter writes index.html directly
+            // into cypress/reports (see reportDir in cypress.config.js),
+            // NOT cypress/reports/html.
             publishHTML(target: [
                 allowMissing: true,
                 alwaysLinkToLastBuild: true,
                 keepAll: true,
-                reportDir: 'cypress/reports/html',
+                reportDir: 'cypress/reports',
                 reportFiles: 'index.html',
                 reportName: 'Cypress HTML Report'
             ])
